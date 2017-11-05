@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+String_New	String.c	/^char *String_New(int size)$/;"	f
+String_StripLeadingAndTrailingSpace	String.c	/^char *String_StripLeadingAndTrailingSpace(const char *in)$/;"	f
+String_StripLeadingSpace	String.c	/^char *String_StripLeadingSpace(const char *in)$/;"	f
+String_StripTrailingSpace	String.c	/^char *String_StripTrailingSpace(const char *in)$/;"	f
+__DEFS_H__	defs.h	12;"	d
+__STRING_H__	String.h	12;"	d
+__XMALLOC_H__	xMalloc.h	12;"	d
+main	Main.c	/^int main(int argc, char *argv[])$/;"	f
+xCalloc	xMalloc.c	/^void *xCalloc(size_t nmemb, size_t size)$/;"	f
+xFree	xMalloc.c	/^void *xFree(void *ptr)$/;"	f
+xMalloc	xMalloc.c	/^void *xMalloc(size_t size)$/;"	f
+xRealloc	xMalloc.c	/^void *xRealloc(void* ptr, size_t size)$/;"	f
