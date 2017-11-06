@@ -34,5 +34,6 @@
 
 #include "xMalloc.h"
 #include "String.h"
+#include "DebugUtils.h"
 
 #endif

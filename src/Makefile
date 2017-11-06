@@ -16,16 +16,19 @@ QUIET_PROC=$(QUIET_CC)$(CC)
 QUIET_EXEC=$(QUIET_EXE)exec
 QUIET_REMOVE=$(QUIET_RM)rm -f
 
-src  = xMalloc.c \
-			 String.c  \
-			 Main.c    \
+CFLAGS += -DDBUG_ON
+
+src  = DebugUtils.c \
+			 xMalloc.c    \
+			 String.c     \
+			 Main.c       \
 
 obj  = Main
 
 all:$(obj)
 
 $(obj):$(src)
-	$(QUIET_PROC) $(src) -o $(obj)
+	$(QUIET_PROC) $(CFLAGS) $(src) -o $(obj)
 
 run:$(obj)
 	$(QUIET_EXEC) $(PWD)/$(obj)

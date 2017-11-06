@@ -40,22 +40,6 @@ typedef struct StringHeader_ {
 	unsigned int strflag;
 } StringHeader;
 
-/*
-String_New
-String_StripLeading                 - strip the leading spaces
-String_StripTrailingSpace           - strip the trailing spaces
-String_StripLeadingAndTrailingSpace - strip the leading and trailing spaces
-String_SafeCopy                     - safely to copy a string
-String_Dup                          - dup a string
-String_Concat
-String_Compare
-String_Swap
-String_Substr
-String_Replace
-String_Insert
-String_Split
-*/
-
 /**
  * Determine whether the point is a STRING-type
  */
@@ -64,19 +48,37 @@ String_Split
 /**
  * Determine whether the character is a blank character
  */
-#define IS_SPACECHAR(ch) ({(\
-		(typeof(ch) __ch = (ch);) && (\
-		__ch == '\f' ||\
-		__ch == '\n' ||\
-		__ch == '\r' ||\
-		__ch == '\t' ||\
-		__ch == '\v' ||\
-		__ch == ' '))})
+#define IS_SPACECHAR(ch) (\
+		ch == '\f' ||\
+		ch == '\n' ||\
+		ch == '\r' ||\
+		ch == '\t' ||\
+		ch == '\v' ||\
+		ch == ' ')
 
+#define STRING_LENGTH(str) \
+	(((StringHeader*)(str-sizeof(StringHeader)))->lengths)
+#define STRING_SIZEOF(str) \
+	(((StringHeader*)(str-sizeof(StringHeader)))->cursize)
+#define STRING_PRESIZE(str) \
+	(((StringHeader*)(str-sizeof(StringHeader)))->presize)
+
+#define STRING_SET_LENGTH(str, nsize) \
+	(((StringHeader*)(str-sizeof(StringHeader)))->lengths = nsize)
+#define STRING_SET_SIZEOF(str, nsize) \
+	(((StringHeader*)(str-sizeof(StringHeader)))->cursize = nsize)
+#define STRING_SET_PRESIZE(str, nsize) \
+	(((StringHeader*)(str-sizeof(StringHeader)))->presize = nsize)
 
 char *String_New(int size);
 char *String_StripLeadingSpace(const char *in);
 char *String_StripTrailingSpace(const char *in);
 char *String_StripLeadingAndTrailingSpace(const char *in);
+
+char *String_Dup(const char *in);
+char *String_SafeCopy(char *s1, const char *s2);
+char *String_Concat(const char *s1, int l1, const char *s2, int l2);
+
+void String_Destroy(void *ptr);
 
 #endif
