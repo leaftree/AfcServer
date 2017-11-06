@@ -49,7 +49,8 @@ char *String_New(int size)
 
 	((StringHeader*)ptr)->presize = size;
 	((StringHeader*)ptr)->cursize = size;
-	((StringHeader*)ptr)->strflag = STR_MARK;
+	((StringHeader*)ptr)->lengths = 0x0;
+	((StringHeader*)ptr)->strflag = STRING_MARK;
 
 	return ptr + sizeof(StringHeader);
 }
@@ -86,14 +87,61 @@ char *String_Resize(const char *in, int osize, int nsize)
 
 	((StringHeader*)ptr)->presize = osize;
 	((StringHeader*)ptr)->cursize = nsize;
-	((StringHeader*)ptr)->strflag = STR_MARK;
+	((StringHeader*)ptr)->lengths = osize;
+	((StringHeader*)ptr)->strflag = STRING_MARK;
 
 	return ptr + sizeof(StringHeader);
 }
 
+/**
+ * String_StripLeadingSpace - Strip the space character
+ *
+ * @in : origin string
+ *
+ * Return values
+ * NULL     : all character is Space Character, or @in is invalid,
+ *            or alloc memory fail.
+ * New Addr : Strip succeed, return the beginning address(a new address)
+ *
+ * If @in is invalid, it'll return NULL, and set errno as EINVAL
+ * If all character is Space Character, it'll return NULL, and errno set as Zero
+ * If @xMalloc fail, it'll return NULL and set errno as ENOMEM
+ *
+ * Caller should check errno when call @String_StripLeadingSpace fail.
+ */
 char *String_StripLeadingSpace(const char *in)
 {
-	;
+    errno=0;
+
+    char ch;
+    char *ptr = NULL;
+    const char *baseptr = in;
+
+    if(!in) {
+        errno=EINVAL;
+        return NULL;
+    }
+
+    printf("%s %d %s\n", __func__, __LINE__, baseptr);
+    while(IS_SPACECHAR(*baseptr++)) {
+    printf("%s %s\n", __func__, baseptr);
+        /* null */
+    }
+
+    if(!*baseptr) {
+        errno=0;
+        return NULL;
+    }
+
+    int len = strlen(baseptr);
+	
+    ptr = String_Resize(baseptr, len, len+1);
+    if(!ptr) {
+        errno=ENOMEM;
+        return NULL;
+    }
+
+    return ptr;
 }
 
 char *String_StripTrailingSpace(const char *in)
@@ -116,7 +164,7 @@ void String_Destroy(void *ptr)
 	if(!ptr)
 		return;
 
-	if(((StringHeader*)ptr)->strflag == STR_MARK)
+	if(IS_STRING(ptr))
 		xFree(ptr-sizeof(StringHeader));
 
 	return;

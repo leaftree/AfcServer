@@ -3,15 +3,27 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_VERSION	5.8	//
+IS_SPACECHAR	String.h	67;"	d
+IS_STRING	String.h	62;"	d
+STRING_MARK	String.h	16;"	d
+StringHeader	String.h	/^} StringHeader;$/;"	t	typeref:struct:StringHeader_
+StringHeader_	String.h	/^typedef struct StringHeader_ {$/;"	s
+String_Destroy	String.c	/^void String_Destroy(void *ptr)$/;"	f
+String_Dup	String.c	/^char *String_Dup()$/;"	f
 String_New	String.c	/^char *String_New(int size)$/;"	f
+String_Resize	String.c	/^char *String_Resize(const char *in, int osize, int nsize)$/;"	f
 String_StripLeadingAndTrailingSpace	String.c	/^char *String_StripLeadingAndTrailingSpace(const char *in)$/;"	f
 String_StripLeadingSpace	String.c	/^char *String_StripLeadingSpace(const char *in)$/;"	f
 String_StripTrailingSpace	String.c	/^char *String_StripTrailingSpace(const char *in)$/;"	f
 __DEFS_H__	defs.h	12;"	d
 __STRING_H__	String.h	12;"	d
 __XMALLOC_H__	xMalloc.h	12;"	d
+cursize	String.h	/^	unsigned int cursize;$/;"	m	struct:StringHeader_
+lengths	String.h	/^	unsigned int lengths;$/;"	m	struct:StringHeader_
 main	Main.c	/^int main(int argc, char *argv[])$/;"	f
+presize	String.h	/^	unsigned int presize;$/;"	m	struct:StringHeader_
+strflag	String.h	/^	unsigned int strflag;$/;"	m	struct:StringHeader_
 xCalloc	xMalloc.c	/^void *xCalloc(size_t nmemb, size_t size)$/;"	f
 xFree	xMalloc.c	/^void *xFree(void *ptr)$/;"	f
 xMalloc	xMalloc.c	/^void *xMalloc(size_t size)$/;"	f

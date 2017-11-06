@@ -13,28 +13,30 @@
 
 #include "defs.h"
 
-#define STR_MARK 0x00535359
+#define STRING_MARK 0x00535359
 
 /**
  *
  * struct StringHeader - Header of a string
  *
- * @presize : Previous length
- * @cursize : Current length
+ * @presize : Previous valid length
+ * @cursize : Current valid length
+ * @lengths : Current used length
  * @strflag : Mark it as a string
  *
- * @strflag is a fixed value as @STR_MARK
+ * @strflag is a fixed value as @STRING_MARK
  *
  * When use String_New() to create a string, it will alloc
- * 12Bytes + string-size Byte(s) memory.
+ * 16Bytes + string-size Byte(s) memory.
  *
- * But function only return string-size Btye(s). The 12Bytes is hidden, it is
+ * But function only return string-size Btye(s). The 16Bytes is hidden, it is
  * used to represent the current length of the string, and it'll keep the 
  * previous length.
  */
 typedef struct StringHeader_ {
 	unsigned int presize;
 	unsigned int cursize;
+	unsigned int lengths;
 	unsigned int strflag;
 } StringHeader;
 
@@ -53,6 +55,24 @@ String_Replace
 String_Insert
 String_Split
 */
+
+/**
+ * Determine whether the point is a STRING-type
+ */
+#define IS_STRING(ptr) (((StringHeader*)ptr)->strflag == STRING_MARK)
+
+/**
+ * Determine whether the character is a blank character
+ */
+#define IS_SPACECHAR(ch) ({(\
+		(typeof(ch) __ch = (ch);) && (\
+		__ch == '\f' ||\
+		__ch == '\n' ||\
+		__ch == '\r' ||\
+		__ch == '\t' ||\
+		__ch == '\v' ||\
+		__ch == ' '))})
+
 
 char *String_New(int size);
 char *String_StripLeadingSpace(const char *in);

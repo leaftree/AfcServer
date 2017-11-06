@@ -13,5 +13,14 @@
 int main(int argc, char *argv[])
 {
 	int iRetValue = 0;
+
+    char *p = "  I Love ShenSiYuan";
+
+    char *ssy = String_StripLeadingSpace(p);
+
+    printf("%s\n", ssy);
+
+    String_Destroy(ssy);
+
 	return iRetValue;
 }
