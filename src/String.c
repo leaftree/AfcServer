@@ -49,6 +49,34 @@ char *String_New(int size)
 }
 
 /**
+ * String_Create - Create a string and initialize by param
+ *
+ * @ptr  : origin string
+ * @size : valid length of origin string
+ *
+ * Return values
+ * NULL     : Create string failed or @ptr is null
+ * New Addr : Create succeed, return the beginning address
+ *
+ */
+char *String_Create(char *ptr, int size)
+{
+	if(!ptr || size<1)
+		return NULL;
+
+	char *dataptr = xMalloc(size+sizeof(StringHeader)+1);
+	if(!dataptr)
+		return NULL;
+
+	((StringHeader*)ptr)->presize = size+1;
+	((StringHeader*)ptr)->cursize = size+1;
+	((StringHeader*)ptr)->lengths = size;
+	((StringHeader*)ptr)->strflag = STRING_MARK;
+
+	return dataptr + sizeof(StringHeader);
+}
+
+/**
  * String_Resize - Re-set string's length
  *
  * @in    : origin string
@@ -84,6 +112,180 @@ char *String_Resize(const char *in, int osize, int nsize)
 	((StringHeader*)ptr)->strflag = STRING_MARK;
 
 	return ptr + sizeof(StringHeader);
+}
+
+/**
+ * String_Dup - Duplicate a string
+ *
+ * @in : origin string
+ *
+ * Waring: @in should be a string, if it's C-string(char*), may be crash.
+ *
+ * Return values
+ * NULL     : @in is null or duplicate failed
+ * New Addr : duplicate succeed, return new string address
+ */
+char *String_Dup(const char *in)
+{
+	char *ptr = NULL;
+	ptr = String_SafeCopy(ptr, in);
+
+	return ptr;
+}
+
+/**
+ * String_Concat - Concat two string
+ *
+ * @s1 : pionneer string
+ * @l1 : length of pionneer string
+ * @s2 : spliced string
+ * @l2 : length of spliced string
+ *
+ * Return values
+ * NULL     :
+ * New Addr : 
+ *
+ */
+char *String_Concat(const char *s1, int l1, const char *s2, int l2)
+{
+	char *ptr = NULL;
+
+	if(!s1) return (char*)s2;
+	if(!s2) return (char*)s1;
+
+	ptr = String_New(l1+l2+1);
+	if(!ptr)
+		return NULL;
+
+	memcpy(ptr, s1, l1);
+	memcpy(ptr+l1, s2, l2);
+
+	STRING_SET_LENGTH(ptr, l1+l2);
+
+	return ptr;
+}
+
+/**
+ * String_SafeCopy - Copy a string safely
+ *
+ * @s1 : object string
+ * @s2 : origin string
+ *
+ * Return values
+ * NULL     : copy work failed
+ * New Addr : return the address of object string
+ *
+ * If @s1 is null, it'll allocated a space for @s1
+ * If @s1 has no enough sapce, it'll extend it's space
+ */
+char *String_SafeCopy(char *s1, const char *s2)
+{
+	char *ptr = NULL;
+
+	if(!s2 || STRING_SIZEOF(s2)<1)
+		return NULL;
+
+	if(!s1)
+	{
+		ptr = String_New(STRING_LENGTH(s2)+1);
+		if(!ptr)
+			return NULL;
+	}
+	else if(STRING_SIZEOF(s1) < STRING_SIZEOF(s2))
+	{
+		ptr = String_Resize(s1, STRING_LENGTH(s1), STRING_LENGTH(s2));
+		if(!ptr)
+			return NULL;
+		String_Destroy(s1);
+	}
+
+	memcpy(ptr, s2, STRING_LENGTH(s2));
+	STRING_SET_LENGTH(ptr, STRING_LENGTH(s2));
+	s1 = ptr;
+
+	return ptr;
+}
+
+/**
+ * String_Compare - Compare(memory compare) two string
+ *
+ * @s1 : 1st string
+ * @s2 : 2nd string
+ *
+ * Return values
+ * = 0 : equal
+ * > 0 : s1>s2
+ * < 0 : s2>s1
+ *
+ * When return values is not zero, the value is they diff
+ */
+int String_Compare(const char *s1, const char *s2)
+{
+	if(!s1 || !s2)
+	{
+		if(!s1 && !s2)
+			return 0;
+		if(!s1)
+			return *s2;
+		if(!s2)
+			return *s1;
+	}
+
+	return memcmp(s1, s2,
+			STRING_LENGTH(s1) > STRING_LENGTH(s2) ?
+			STRING_LENGTH(s2) : STRING_LENGTH(s1));
+}
+
+/**
+ * String_Swap - Swap two string
+ *
+ * @s1 : 1st sring
+ * @s2 : 2nd string
+ *
+ * No return value
+ */
+void String_Swap(char *s1, char *s2)
+{
+	return ;
+}
+
+char *String_Substr(char *s1, char *s2)
+{
+	return NULL;
+}
+
+char *String_Replace(char *ptr, char d, char s)
+{
+	return NULL;
+}
+
+char *String_Insert(char *ptr)
+{
+	return NULL;
+}
+
+char *String_Split(char *ptr)
+{
+	return NULL;
+}
+
+/**
+ * String_Destroy - Free the memory of a string
+ *
+ * @ptr : The object needed to be free
+ *
+ * Return values
+ * No return values
+ */
+void String_Destroy(void *ptr)
+{
+	if(!ptr)
+		return;
+
+	if(IS_STRING(ptr))
+		xFree(ptr-sizeof(StringHeader));
+
+	return;
 }
 
 /**
@@ -239,181 +441,6 @@ char *String_StripLeadingAndTrailingSpace(const char *in)
 
 	return ptr;
 }
-
-/**
- * String_Dup - Duplicate a string
- *
- * @in : origin string
- *
- * Waring: @in should be a string, if it's C-string(char*), may be crash.
- *
- * Return values
- * NULL     : @in is null or duplicate failed
- * New Addr : duplicate succeed, return new string address
- */
-char *String_Dup(const char *in)
-{
-	char *ptr = NULL;
-	ptr = String_SafeCopy(ptr, in);
-
-	return ptr;
-}
-
-/**
- * String_Concat - Concat two string
- *
- * @s1 : pionneer string
- * @l1 : length of pionneer string
- * @s2 : spliced string
- * @l2 : length of spliced string
- *
- * Return values
- * NULL     :
- * New Addr : 
- *
- */
-char *String_Concat(const char *s1, int l1, const char *s2, int l2)
-{
-	char *ptr = NULL;
-
-	if(!s1) return (char*)s2;
-	if(!s2) return (char*)s1;
-
-	ptr = String_New(l1+l2+1);
-	if(!ptr)
-		return NULL;
-
-	memcpy(ptr, s1, l1);
-	memcpy(ptr+l1, s2, l2);
-
-	STRING_SET_LENGTH(ptr, l1+l2);
-
-	return ptr;
-}
-
-/**
- * String_SafeCopy - Copy a string safely
- *
- * @s1 : object string
- * @s2 : origin string
- *
- * Return values
- * NULL     : copy work failed
- * New Addr : return the address of object string
- *
- * If @s1 is null, it'll allocated a space for @s1
- * If @s1 has no enough sapce, it'll extend it's space
- */
-char *String_SafeCopy(char *s1, const char *s2)
-{
-	char *ptr = NULL;
-
-	if(!s2 || STRING_SIZEOF(s2)<1)
-		return NULL;
-
-	if(!s1)
-	{
-		ptr = String_New(STRING_LENGTH(s2)+1);
-		if(!ptr)
-			return NULL;
-	}
-	else if(STRING_SIZEOF(s1) < STRING_SIZEOF(s2))
-	{
-		ptr = String_Resize(s1, STRING_LENGTH(s1), STRING_LENGTH(s2));
-		if(!ptr)
-			return NULL;
-		String_Destroy(s1);
-	}
-
-	memcpy(ptr, s2, STRING_LENGTH(s2));
-	STRING_SET_LENGTH(ptr, STRING_LENGTH(s2));
-	s1 = ptr;
-
-	return ptr;
-}
-
-/**
- * String_Compare - Compare(memory compare) two string
- *
- * @s1 : 1st string
- * @s2 : 2nd string
- *
- * Return values
- * = 0 : equal
- * > 0 : s1>s2
- * < 0 : s2>s1
- *
- * When return values is not zero, the value is they diff
- */
-int String_Compare(const char *s1, const char *s2)
-{
-	if(!s1 || !s2)
-	{
-		if(!s1 && !s2)
-			return 0;
-		if(!s1)
-			return *s2;
-		if(!s2)
-			return *s1;
-	}
-
-	return memcmp(s1, s2,
-			STRING_LENGTH(s1) > STRING_LENGTH(s2) ?
-			STRING_LENGTH(s2) : STRING_LENGTH(s1));
-}
-
-/**
- * String_Swap - Swap two string
- *
- * @s1 : 1st sring
- * @s2 : 2nd string
- *
- * No return value
- */
-void String_Swap(char *s1, char *s2)
-{
-	return NULL;
-}
-
-char *String_Substr(char *s1, char *s2)
-{
-	return NULL;
-}
-
-char *String_Replace(char *ptr, char d, char s)
-{
-	return NULL;
-}
-
-char *String_Insert(char *ptr)
-{
-	return NULL;
-}
-
-char *String_Split(char *ptr)
-{
-	return NULL;
-}
-
-/**
- * String_Destroy - Free the memory of a string
- *
- * @ptr : The object needed to be free
- *
- * Return values
- * No return values
- */
-void String_Destroy(void *ptr)
-{
-	if(!ptr)
-		return;
-
-	if(IS_STRING(ptr))
-		xFree(ptr-sizeof(StringHeader));
-
-	return;
-}
-
 
 /****************************************
  *
