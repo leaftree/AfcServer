@@ -71,13 +71,17 @@ typedef struct StringHeader_ {
 	(((StringHeader*)(str-sizeof(StringHeader)))->presize = nsize)
 
 char *String_New(int size);
+char *String_Create(char *ptr, int size);
+char *String_Concat(char *s1, const char *s2);
 char *String_StripLeadingSpace(const char *in);
 char *String_StripTrailingSpace(const char *in);
 char *String_StripLeadingAndTrailingSpace(const char *in);
 
+char *String_StripLeadingAndTrailingSpace2(char *in);
+
 char *String_Dup(const char *in);
 char *String_SafeCopy(char *s1, const char *s2);
-char *String_Concat(const char *s1, int l1, const char *s2, int l2);
+char *String_Concat2(const char *s1, int l1, const char *s2, int l2);
 
 void String_Destroy(void *ptr);
 

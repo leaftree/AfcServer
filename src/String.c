@@ -57,21 +57,24 @@ char *String_New(int size)
  * Return values
  * NULL     : Create string failed or @ptr is null
  * New Addr : Create succeed, return the beginning address
- *
  */
 char *String_Create(char *ptr, int size)
 {
+    char *dataptr = NULL;
+
 	if(!ptr || size<1)
 		return NULL;
 
-	char *dataptr = xMalloc(size+sizeof(StringHeader)+1);
+	dataptr = xMalloc(size+sizeof(StringHeader)+1);
 	if(!dataptr)
 		return NULL;
 
-	((StringHeader*)ptr)->presize = size+1;
-	((StringHeader*)ptr)->cursize = size+1;
-	((StringHeader*)ptr)->lengths = size;
-	((StringHeader*)ptr)->strflag = STRING_MARK;
+	((StringHeader*)dataptr)->presize = size+1;
+	((StringHeader*)dataptr)->cursize = size+1;
+	((StringHeader*)dataptr)->lengths = size;
+	((StringHeader*)dataptr)->strflag = STRING_MARK;
+
+    memcpy(dataptr + sizeof(StringHeader), ptr, size);
 
 	return dataptr + sizeof(StringHeader);
 }
@@ -134,35 +137,42 @@ char *String_Dup(const char *in)
 }
 
 /**
- * String_Concat - Concat two string
+ * String_Concat - Concat a string to an other string
  *
  * @s1 : pionneer string
- * @l1 : length of pionneer string
  * @s2 : spliced string
- * @l2 : length of spliced string
+ *
+ * @String_Concat is stitching @s2 to @s1
  *
  * Return values
- * NULL     :
- * New Addr : 
- *
+ * NULL     : the length of @s1 is not enough and allocate memory failed
+ * Addr @s1 : @s2 is null, return @s1. If length of @s1 is enough, stitching
+ *            @s2 to @s1 and return the address of @s1
+ * New Addr : the length of @s1 is not enough, allocate new address succeed
+ *            and stitching succeed
  */
-char *String_Concat(const char *s1, int l1, const char *s2, int l2)
+char *String_Concat(char *s1, const char *s2)
 {
-	char *ptr = NULL;
+    char *ptr = NULL;
 
-	if(!s1) return (char*)s2;
-	if(!s2) return (char*)s1;
+	if(!s2)
+        return NULL;
 
-	ptr = String_New(l1+l2+1);
-	if(!ptr)
-		return NULL;
+    if(!s1 || (STRING_SIZEOF(s1) - STRING_LENGTH(s1) < STRING_LENGTH(s2)-1))
+    {
+        ptr = String_Resize(s1,
+                STRING_SIZEOF(s1),
+                STRING_LENGTH(s1) + STRING_LENGTH(s2)+1);
+        if(!ptr)
+            return NULL;
+        String_Destroy(s1);
+    }
 
-	memcpy(ptr, s1, l1);
-	memcpy(ptr+l1, s2, l2);
+    memcpy(ptr+STRING_LENGTH(ptr)-1, s2, STRING_LENGTH(s2));
 
-	STRING_SET_LENGTH(ptr, l1+l2);
+    s1 = ptr;
 
-	return ptr;
+    return ptr;
 }
 
 /**
@@ -447,22 +457,126 @@ char *String_StripLeadingAndTrailingSpace(const char *in)
  *
  *
  ***************************************/
+/**
+ * String_StripLeadingSpace2 - Strip the leading space character
+ *
+ * @in : origin string
+ *
+ * Return values
+ * NULL     : all character is Space Character, or @in is invalid,
+ * New Addr : Strip succeed, return the beginning address first nospace char
+ */
 char *String_StripLeadingSpace2(char *in)
 {
-	;
+	const char *ptr = in;
+
+	if(!ptr) {
+		return NULL;
+	}
+
+	while(IS_SPACECHAR(*ptr)) {
+		ptr++;
+	}
+
+	if(!*ptr) {
+		return NULL;
+	}
+
+	return (char*)ptr;
 }
 
+/**
+ * String_StripTrailingSpace2 - Strip the trailing space character
+ *
+ * @in : origin string
+ *
+ * It will modify @in, so @in must be a un-const c style string
+ *
+ * Return values
+ * NULL        : all character is Space Character, or @in is invalid,
+ * Origin Addr : return the address of @in
+ */
 char *String_StripTrailingSpace2(char *in)
 {
-	;
+	char *ptr = in;
+
+	if(!ptr) {
+		return NULL;
+	}
+
+    ptr = ptr+strlen(in);
+
+	while(IS_SPACECHAR(*ptr) && ptr != in) {
+		*ptr-- = 0;
+	}
+
+	if(!*ptr) {
+		return NULL;
+	}
+
+	return (char*)in;
 }
 
+/**
+ * String_StripLeadingAndTrailingSpace2 - 
+ * Strip the leading and trailing space character
+ *
+ * @in - origin string
+ *
+ * It will modify @in, so @in must be a un-const c style string
+ *
+ * Return values
+ * NULL     : all character is Space Character, or @in is invalid,
+ * New Addr : Strip succeed, return the beginning address first nospace char
+ */
 char *String_StripLeadingAndTrailingSpace2(char *in)
 {
-	;
+	char *ptr = in;
+    
+    if(!ptr)
+        return NULL;
+
+    ptr += strlen(in)-1;
+
+	while(IS_SPACECHAR(*ptr) && ptr != in) {
+		*ptr-- = 0;
+	}
+
+    ptr = in;
+	while(IS_SPACECHAR(*ptr)) {
+		ptr++;
+	}
+
+    return ptr;
 }
 
-char *String_Concat2(char *s1, const char *s2)
+/**
+ * String_Concat2 - Concat two string
+ *
+ * @s1 : pionneer string
+ * @l1 : length of pionneer string
+ * @s2 : spliced string
+ * @l2 : length of spliced string
+ *
+ * Return values
+ * NULL     :
+ * New Addr : 
+ */
+char *String_Concat2(const char *s1, int l1, const char *s2, int l2)
 {
-	;
+	char *ptr = NULL;
+
+	if(!s1) return (char*)s2;
+	if(!s2) return (char*)s1;
+
+	ptr = String_New(l1+l2+1);
+	if(!ptr)
+		return NULL;
+
+	memcpy(ptr, s1, l1);
+	memcpy(ptr+l1, s2, l2);
+
+	STRING_SET_LENGTH(ptr, l1+l2);
+
+	return ptr;
 }

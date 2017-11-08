@@ -19,6 +19,7 @@ extern char _dig_vec[];
 extern int _db_on_, _no_db_;
 extern FILE *_db_fp_;
 extern char *_db_process_;
+
 extern int _db_keyword_(const char *keyword);
 extern void _db_setjmp_(void);
 extern void _db_longjmp_(void);
@@ -46,18 +47,15 @@ _db_enter_ (a,__FILE__,__LINE__,&_db_func_,&_db_file_,&_db_level_, \
 
 #define DBUG_RETURN(a1) {DBUG_LEAVE; return(a1);}
 #define DBUG_VOID_RETURN {DBUG_LEAVE; return;}
-#define DBUG_EXECUTE(keyword,a1) \
-{if (_db_on_) {if (_db_keyword_ (keyword)) { a1 }}}
-#define DBUG_PRINT(keyword,arglist) \
-{if (_db_on_) {_db_pargs_(__LINE__,keyword); _db_doprnt_ arglist;}}
+#define DBUG_EXECUTE(keyword,a1) {if (_db_on_) {if (_db_keyword_ (keyword)) { a1 }}}
+#define DBUG_PRINT(keyword,arglist) {if (_db_on_) {_db_pargs_(__LINE__,keyword); _db_doprnt_ arglist;}}
 #define DBUG_PUSH(a1) _db_push_ (a1)
 #define DBUG_POP() _db_pop_ ()
 #define DBUG_PROCESS(a1) (_db_process_ = a1)
 #define DBUG_FILE (_db_fp_)
 #define DBUG_SETJMP(a1) (_db_setjmp_ (), setjmp (a1))
 #define DBUG_LONGJMP(a1,a2) (_db_longjmp_ (), longjmp (a1, a2))
-#define DBUG_DUMP(keyword,a1,a2)\
-{if (_db_on_) {_db_dump_(__LINE__,keyword,a1,a2);}}
+#define DBUG_DUMP(keyword,a1,a2) {if (_db_on_) {_db_dump_(__LINE__,keyword,a1,a2);}}
 #define DBUG_IN_USE (_db_fp_ && _db_fp_ != stderr)
 #define DEBUGGER_OFF _no_db_=1;_db_on_=0;
 #define DEBUGGER_ON  _no_db_=0

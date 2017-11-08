@@ -3,15 +3,15 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-AUTO	DebugUtils.c	84;"	d	file:
-AUTOS_REVERSE	DebugUtils.c	106;"	d	file:
+!_TAG_PROGRAM_VERSION	5.8	//
+AUTO	DebugUtils.c	83;"	d	file:
+AUTOS_REVERSE	DebugUtils.c	105;"	d	file:
 BOOLEAN	DebugUtils.c	/^typedef int BOOLEAN;$/;"	t	file:
-BOOLEAN	DebugUtils.c	75;"	d	file:
+BOOLEAN	DebugUtils.c	74;"	d	file:
 BaseName	DebugUtils.c	/^BaseName(const char *pathname)$/;"	f	file:
 CODE_STATE	DebugUtils.c	/^CODE_STATE;$/;"	t	typeref:struct:st_code_state	file:
 ChangeOwner	DebugUtils.c	/^ChangeOwner(char *pathname)$/;"	f	file:
-ChangeOwner	DebugUtils.c	267;"	d	file:
+ChangeOwner	DebugUtils.c	266;"	d	file:
 Clock	DebugUtils.c	/^Clock()$/;"	f	file:
 CloseFile	DebugUtils.c	/^CloseFile(FILE * fp)$/;"	f	file:
 DBUGOpenFile	DebugUtils.c	/^DBUGOpenFile(const char *name, int append)$/;"	f	file:
@@ -30,7 +30,7 @@ DBUG_IN_USE	DebugUtils.h	82;"	d
 DBUG_LEAVE	DebugUtils.h	44;"	d
 DBUG_LONGJMP	DebugUtils.h	58;"	d
 DBUG_LONGJMP	DebugUtils.h	80;"	d
-DBUG_OFF	DebugUtils.c	15;"	d	file:
+DBUG_OFF	DebugUtils.c	14;"	d	file:
 DBUG_POP	DebugUtils.h	54;"	d
 DBUG_POP	DebugUtils.h	76;"	d
 DBUG_PRINT	DebugUtils.h	51;"	d
@@ -53,59 +53,59 @@ DEBUGGER_OFF	DebugUtils.h	62;"	d
 DEBUGGER_OFF	DebugUtils.h	83;"	d
 DEBUGGER_ON	DebugUtils.h	63;"	d
 DEBUGGER_ON	DebugUtils.h	84;"	d
-DEBUGGING	DebugUtils.c	62;"	d	file:
-DEBUG_ON	DebugUtils.c	50;"	d	file:
-DEPTH_ON	DebugUtils.c	53;"	d	file:
+DEBUGGING	DebugUtils.c	61;"	d	file:
+DEBUG_ON	DebugUtils.c	49;"	d	file:
+DEPTH_ON	DebugUtils.c	52;"	d	file:
 DateStamp	DebugUtils.c	/^struct DateStamp$/;"	s	file:
 DbugExit	DebugUtils.c	/^DbugExit(const char *why)$/;"	f	file:
 DbugMalloc	DebugUtils.c	/^DbugMalloc(int size)$/;"	f	file:
 Delay	DebugUtils.c	/^Delay(int ticks)$/;"	f	file:
-Delay	DebugUtils.c	275;"	d	file:
+Delay	DebugUtils.c	274;"	d	file:
 DelayArg	DebugUtils.c	/^DelayArg(int value)$/;"	f	file:
 DoPrefix	DebugUtils.c	/^DoPrefix(uint _line_)$/;"	f	file:
 DoProfile	DebugUtils.c	/^DoProfile()$/;"	f	file:
 DoTrace	DebugUtils.c	/^DoTrace(CODE_STATE * state)$/;"	f	file:
-EOS	DebugUtils.c	33;"	d	file:
-ERR_ABORT	DebugUtils.c	251;"	d	file:
-ERR_CHOWN	DebugUtils.c	252;"	d	file:
-ERR_CLOSE	DebugUtils.c	250;"	d	file:
-ERR_MISSING_RETURN	DebugUtils.c	248;"	d	file:
-ERR_OPEN	DebugUtils.c	249;"	d	file:
-EXISTS	DebugUtils.c	258;"	d	file:
-EXISTS	DebugUtils.c	260;"	d	file:
-EXISTS	DebugUtils.c	263;"	d	file:
-EXPORT	DebugUtils.c	83;"	d	file:
-FILE_ON	DebugUtils.c	51;"	d	file:
-FLUSH_ON_WRITE	DebugUtils.c	59;"	d	file:
-FN_LIBCHAR	DebugUtils.c	19;"	d	file:
-FN_REFLEN	DebugUtils.c	20;"	d	file:
+EOS	DebugUtils.c	32;"	d	file:
+ERR_ABORT	DebugUtils.c	250;"	d	file:
+ERR_CHOWN	DebugUtils.c	251;"	d	file:
+ERR_CLOSE	DebugUtils.c	249;"	d	file:
+ERR_MISSING_RETURN	DebugUtils.c	247;"	d	file:
+ERR_OPEN	DebugUtils.c	248;"	d	file:
+EXISTS	DebugUtils.c	257;"	d	file:
+EXISTS	DebugUtils.c	259;"	d	file:
+EXISTS	DebugUtils.c	262;"	d	file:
+EXPORT	DebugUtils.c	82;"	d	file:
+FILE_ON	DebugUtils.c	50;"	d	file:
+FLUSH_ON_WRITE	DebugUtils.c	58;"	d	file:
+FN_LIBCHAR	DebugUtils.c	18;"	d	file:
+FN_REFLEN	DebugUtils.c	19;"	d	file:
 FreeList	DebugUtils.c	/^FreeList(struct link *linkp)$/;"	f	file:
-HZ	DebugUtils.c	1761;"	d	file:
-IMPORT	DebugUtils.c	82;"	d	file:
-INDENT	DebugUtils.c	40;"	d	file:
+HZ	DebugUtils.c	1760;"	d	file:
+IMPORT	DebugUtils.c	81;"	d	file:
+INDENT	DebugUtils.c	39;"	d	file:
 IS_SPACECHAR	String.h	51;"	d
 IS_STRING	String.h	46;"	d
 InList	DebugUtils.c	/^InList(struct link *linkp, const char *cp)$/;"	f	file:
 Indent	DebugUtils.c	/^Indent(int indent)$/;"	f	file:
-LINE_ON	DebugUtils.c	52;"	d	file:
+LINE_ON	DebugUtils.c	51;"	d	file:
 ListParse	DebugUtils.c	/^ListParse(char *ctlp)$/;"	f	file:
-MAXDEPTH	DebugUtils.c	41;"	d	file:
-NUMBER_ON	DebugUtils.c	55;"	d	file:
-NullS	DebugUtils.c	21;"	d	file:
+MAXDEPTH	DebugUtils.c	40;"	d	file:
+NUMBER_ON	DebugUtils.c	54;"	d	file:
+NullS	DebugUtils.c	20;"	d	file:
 OpenProfile	DebugUtils.c	/^OpenProfile(const char *name)$/;"	f	file:
-PID_ON	DebugUtils.c	57;"	d	file:
-PRINTBUF	DebugUtils.c	39;"	d	file:
-PROCESS_ON	DebugUtils.c	54;"	d	file:
-PROFILE_ON	DebugUtils.c	56;"	d	file:
-PROFILING	DebugUtils.c	63;"	d	file:
-PROF_EFMT	DebugUtils.c	101;"	d	file:
-PROF_FILE	DebugUtils.c	100;"	d	file:
-PROF_SFMT	DebugUtils.c	102;"	d	file:
-PROF_XFMT	DebugUtils.c	103;"	d	file:
+PID_ON	DebugUtils.c	56;"	d	file:
+PRINTBUF	DebugUtils.c	38;"	d	file:
+PROCESS_ON	DebugUtils.c	53;"	d	file:
+PROFILE_ON	DebugUtils.c	55;"	d	file:
+PROFILING	DebugUtils.c	62;"	d	file:
+PROF_EFMT	DebugUtils.c	100;"	d	file:
+PROF_FILE	DebugUtils.c	99;"	d	file:
+PROF_SFMT	DebugUtils.c	101;"	d	file:
+PROF_XFMT	DebugUtils.c	102;"	d	file:
 PushState	DebugUtils.c	/^PushState()$/;"	f	file:
-REGISTER	DebugUtils.c	85;"	d	file:
-SANITY_CHECK_ON	DebugUtils.c	58;"	d	file:
-STREQ	DebugUtils.c	64;"	d	file:
+REGISTER	DebugUtils.c	84;"	d	file:
+SANITY_CHECK_ON	DebugUtils.c	57;"	d	file:
+STREQ	DebugUtils.c	63;"	d	file:
 STRING_LENGTH	String.h	59;"	d
 STRING_MARK	String.h	16;"	d
 STRING_PRESIZE	String.h	63;"	d
@@ -116,9 +116,10 @@ STRING_SIZEOF	String.h	61;"	d
 StrDup	DebugUtils.c	/^StrDup(const char *str)$/;"	f	file:
 StringHeader	String.h	/^} StringHeader;$/;"	t	typeref:struct:StringHeader_
 StringHeader_	String.h	/^typedef struct StringHeader_ {$/;"	s
-String_Compare	String.c	/^char *String_Compare(const char *s1, const char *s2)$/;"	f
-String_Concat	String.c	/^char *String_Concat(const char *s1, const char *s2)$/;"	f
+String_Compare	String.c	/^int String_Compare(const char *s1, const char *s2)$/;"	f
+String_Concat	String.c	/^char *String_Concat(const char *s1, int l1, const char *s2, int l2)$/;"	f
 String_Concat2	String.c	/^char *String_Concat2(char *s1, const char *s2)$/;"	f
+String_Create	String.c	/^char *String_Create(char *ptr, int size)$/;"	f
 String_Destroy	String.c	/^void String_Destroy(void *ptr)$/;"	f
 String_Dup	String.c	/^char *String_Dup(const char *in)$/;"	f
 String_Insert	String.c	/^char *String_Insert(char *ptr)$/;"	f
@@ -134,16 +135,16 @@ String_StripLeadingSpace2	String.c	/^char *String_StripLeadingSpace2(char *in)$/
 String_StripTrailingSpace	String.c	/^char *String_StripTrailingSpace(const char *in)$/;"	f
 String_StripTrailingSpace2	String.c	/^char *String_StripTrailingSpace2(char *in)$/;"	f
 String_Substr	String.c	/^char *String_Substr(char *s1, char *s2)$/;"	f
-String_Swap	String.c	/^char *String_Swap(char *s1, char *s2)$/;"	f
+String_Swap	String.c	/^void String_Swap(char *s1, char *s2)$/;"	f
 THR_my_pthread_mutex_lock_dbug	DebugUtils.c	/^pthread_mutex_t THR_my_pthread_mutex_lock_dbug;$/;"	v
-TRACE_ON	DebugUtils.c	49;"	d	file:
-TRACING	DebugUtils.c	61;"	d	file:
-WRITABLE	DebugUtils.c	264;"	d	file:
+TRACE_ON	DebugUtils.c	48;"	d	file:
+TRACING	DebugUtils.c	60;"	d	file:
+WRITABLE	DebugUtils.c	263;"	d	file:
 Writable	DebugUtils.c	/^Writable(char *pathname)$/;"	f	file:
-Writable	DebugUtils.c	261;"	d	file:
-_DBUG_START_CONDITION_	DebugUtils.c	24;"	d	file:
-_DBUG_START_CONDITION_	DebugUtils.c	26;"	d	file:
-_VARARGS	DebugUtils.c	18;"	d	file:
+Writable	DebugUtils.c	260;"	d	file:
+_DBUG_START_CONDITION_	DebugUtils.c	23;"	d	file:
+_DBUG_START_CONDITION_	DebugUtils.c	25;"	d	file:
+_VARARGS	DebugUtils.c	17;"	d	file:
 __DEBUGUTILS_H__	DebugUtils.h	12;"	d
 __DEFS_H__	defs.h	12;"	d
 __STRING_H__	String.h	12;"	d
@@ -169,7 +170,7 @@ _dig_vec	DebugUtils.c	/^char _dig_vec[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 _no_db_	DebugUtils.c	/^BOOLEAN _no_db_ = FALSE;				   \/* TRUE if no debugging at all *\/$/;"	v
 begin	DebugUtils.c	/^static struct DateStamp begin;$/;"	v	typeref:struct:DateStamp	file:
 code_state	DebugUtils.c	/^code_state(void)$/;"	f	file:
-code_state	DebugUtils.c	317;"	d	file:
+code_state	DebugUtils.c	316;"	d	file:
 cursize	String.h	/^	unsigned int cursize;$/;"	m	struct:StringHeader_
 dbug_flush	DebugUtils.c	/^dbug_flush(CODE_STATE * state)$/;"	f	file:
 delay	DebugUtils.c	/^    uint delay;						   \/* Delay after each output line *\/$/;"	m	struct:state	file:
@@ -184,7 +185,7 @@ framep	DebugUtils.c	/^    char **framep;					   \/* Pointer to current frame *\/
 func	DebugUtils.c	/^    const char *func;					   \/* Name of current user function *\/$/;"	m	struct:st_code_state	file:
 functions	DebugUtils.c	/^    struct link *functions;				   \/* List of functions *\/$/;"	m	struct:state	typeref:struct:state::link	file:
 init_dbug_state	DebugUtils.c	/^init_dbug_state(void)$/;"	f	file:
-init_dbug_state	DebugUtils.c	316;"	d	file:
+init_dbug_state	DebugUtils.c	315;"	d	file:
 init_done	DebugUtils.c	/^static int init_done = FALSE;			   \/* Set to TRUE when initialization done *\/$/;"	v	file:
 jmpfile	DebugUtils.c	/^    const char *jmpfile;				   \/* Remember current file for setjmp *\/$/;"	m	struct:st_code_state	file:
 jmpfunc	DebugUtils.c	/^    const char *jmpfunc;				   \/* Remember current function for setjmp *\/$/;"	m	struct:st_code_state	file:
@@ -196,9 +197,9 @@ lineno	DebugUtils.c	/^    int lineno;						   \/* Current debugger output line n
 link	DebugUtils.c	/^struct link$/;"	s	file:
 locked	DebugUtils.c	/^    int locked;						   \/* If locked with _db_lock_file *\/$/;"	m	struct:st_code_state	file:
 main	Main.c	/^int main(int argc, char *argv[])$/;"	f
-max	DebugUtils.c	66;"	d	file:
+max	DebugUtils.c	65;"	d	file:
 maxdepth	DebugUtils.c	/^    int maxdepth;					   \/* Current maximum trace depth *\/$/;"	m	struct:state	file:
-min	DebugUtils.c	65;"	d	file:
+min	DebugUtils.c	64;"	d	file:
 name	DebugUtils.c	/^    char name[FN_REFLEN];				   \/* Name of output file *\/$/;"	m	struct:state	file:
 next_link	DebugUtils.c	/^    struct link *next_link;				   \/* Pointer to the next link *\/$/;"	m	struct:link	typeref:struct:link::link	file:
 next_state	DebugUtils.c	/^    struct state *next_state;				   \/* Next state in the list *\/$/;"	m	struct:state	typeref:struct:state::state	file:
@@ -207,8 +208,8 @@ p_functions	DebugUtils.c	/^    struct link *p_functions;				   \/* List of profi
 presize	String.h	/^	unsigned int presize;$/;"	m	struct:StringHeader_
 processes	DebugUtils.c	/^    struct link *processes;				   \/* List of process names *\/$/;"	m	struct:state	typeref:struct:state::link	file:
 prof_file	DebugUtils.c	/^    FILE *prof_file;					   \/* Current profiling stream *\/$/;"	m	struct:state	file:
-pthread_mutex_lock	DebugUtils.c	318;"	d	file:
-pthread_mutex_unlock	DebugUtils.c	319;"	d	file:
+pthread_mutex_lock	DebugUtils.c	317;"	d	file:
+pthread_mutex_unlock	DebugUtils.c	318;"	d	file:
 st_code_state	DebugUtils.c	/^typedef struct st_code_state$/;"	s	file:
 stack	DebugUtils.c	/^static struct state *stack = 0;$/;"	v	typeref:struct:state	file:
 state	DebugUtils.c	/^struct state$/;"	s	file:
